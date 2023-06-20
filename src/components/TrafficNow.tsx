@@ -44,17 +44,32 @@ function TrafficNow({ apiConfig }) {
         <div>{t('Active Connections')}</div>
         <div>{connNumber}</div>
       </div>
+      <div className={s0.sec}>
+        <div>{t('Lost Traffic')}</div>
+        <div>{lost}</div>
+      </div>
+      <div className={s0.sec}>
+        <div>{t('Data Left General/Special')}</div>
+        <div>{Data}</div>
+      </div>
+      <div className={s0.sec}>
+        <div>{t('Phone Bill')}</div>
+        <div>{Bill}</div>
+      </div>
     </div>
   );
 }
 
 function useSpeed(apiConfig: ClashAPIConfig) {
-  const [speed, setSpeed] = useState({ upStr: '0 B/s', downStr: '0 B/s' });
+  const [speed, setSpeed] = useState({ upStr: '0 B/s', downStr: '0 B/s', lost：'0 B', Data: '0 B/0 B', Bill: '0'});
   useEffect(() => {
     return fetchData(apiConfig).subscribe((o) =>
       setSpeed({
         upStr: prettyBytes(o.up) + '/s',
         downStr: prettyBytes(o.down) + '/s',
+        lost: prettyBytes(o.lost),
+		Data: prettyBytes(o.general) + '/' + prettyBytes(o.special),
+		Bill: o.over,
       })
     );
   }, [apiConfig]);
@@ -68,7 +83,7 @@ function useConnection(apiConfig: ClashAPIConfig) {
     connNumber: 0,
   });
   const read = useCallback(
-    ({ downloadTotal, uploadTotal, connections }) => {
+    ({ downloadTotal, uploadTotal, connections, lost, general, special, over}) => {
       setState({
         upTotal: prettyBytes(uploadTotal),
         dlTotal: prettyBytes(downloadTotal),
@@ -82,3 +97,4 @@ function useConnection(apiConfig: ClashAPIConfig) {
   }, [apiConfig, read]);
   return state;
 }
+
