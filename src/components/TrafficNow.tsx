@@ -20,7 +20,7 @@ export default connect(mapState)(TrafficNow);
 
 function TrafficNow({ apiConfig }) {
   const { t } = useTranslation();
-  const { upStr, downStr } = useSpeed(apiConfig);
+  const { upStr, downStr, lost, data, bill } = useSpeed(apiConfig);
   const { upTotal, dlTotal, connNumber } = useConnection(apiConfig);
   return (
     <div className={s0.TrafficNow}>
