@@ -50,18 +50,18 @@ function TrafficNow({ apiConfig }) {
       </div>
       <div className={s0.sec}>
         <div>{t('Data Left General/Special')}</div>
-        <div>{Data}</div>
+        <div>{data}</div>
       </div>
       <div className={s0.sec}>
         <div>{t('Phone Bill')}</div>
-        <div>{Bill}</div>
+        <div>{bill}</div>
       </div>
     </div>
   );
 }
 
 function useSpeed(apiConfig: ClashAPIConfig) {
-  const [speed, setSpeed] = useState({ upStr: '0 B/s', downStr: '0 B/s', lost：'0 B', Data: '0 B/0 B', Bill: '0'});
+  const [speed, setSpeed] = useState({ upStr: '0 B/s', downStr: '0 B/s', lost: '0 B', data: '0 B/0 B', bill: '0'});
   useEffect(() => {
     return fetchData(apiConfig).subscribe((o) =>
       setSpeed({
