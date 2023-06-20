@@ -83,7 +83,7 @@ function useConnection(apiConfig: ClashAPIConfig) {
     connNumber: 0,
   });
   const read = useCallback(
-    ({ downloadTotal, uploadTotal, connections, lost, general, special, over}) => {
+    ({ downloadTotal, uploadTotal, connections}) => {
       setState({
         upTotal: prettyBytes(uploadTotal),
         dlTotal: prettyBytes(downloadTotal),
